@@ -1,6 +1,6 @@
 ---
 name: piflow-debug
-description: Run PiFlow's debug workflow: reproduce/localize, identify root cause, plan the smallest fix, implement only after confirmation, add regression coverage, verify, and review.
+description: "Run PiFlow's debug workflow: reproduce/localize, identify root cause, plan the smallest fix, implement only after confirmation, add regression coverage, verify, and review."
 ---
 
 # PiFlow Debug Workflow

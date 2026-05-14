@@ -1,6 +1,6 @@
 ---
 name: piflow-feature
-description: Run PiFlow's lightweight spec-driven feature workflow: clarify, brief, plan, implement, verify, and review with markdown artifacts and review-confirm gates.
+description: "Run PiFlow's lightweight spec-driven feature workflow: clarify, brief, plan, implement, verify, and review with markdown artifacts and review-confirm gates."
 ---
 
 # PiFlow Feature Workflow

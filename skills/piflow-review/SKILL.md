@@ -1,6 +1,6 @@
 ---
 name: piflow-review
-description: Run PiFlow's code/PR review workflow: inspect diff against intent/spec, assess risks, check tests and validation, and produce a blocking/non-blocking review artifact.
+description: "Run PiFlow's code/PR review workflow: inspect diff against intent/spec, assess risks, check tests and validation, and produce a blocking/non-blocking review artifact."
 ---
 
 # PiFlow Review Workflow

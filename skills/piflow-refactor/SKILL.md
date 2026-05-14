@@ -1,6 +1,6 @@
 ---
 name: piflow-refactor
-description: Run PiFlow's safe refactor workflow: impact analysis, behavior-preserving plan, confirmation, scoped changes, verification, and review.
+description: "Run PiFlow's safe refactor workflow: impact analysis, behavior-preserving plan, confirmation, scoped changes, verification, and review."
 ---
 
 # PiFlow Safe Refactor Workflow
