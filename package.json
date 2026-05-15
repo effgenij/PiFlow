@@ -6,8 +6,7 @@
   "keywords": ["pi-package", "pi", "skills", "spec-driven-development", "agentic-workflow"],
   "pi": {
     "skills": ["./skills"],
-    "prompts": ["./prompts"],
-    "extensions": ["./extensions/acp-ask-user-question/index.ts"]
+    "prompts": ["./prompts"]
   },
   "peerDependencies": {
     "@earendil-works/pi-coding-agent": "*",
