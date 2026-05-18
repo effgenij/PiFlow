@@ -60,55 +60,39 @@ Implement tasks from an OpenSpec change.
    - Remaining tasks overview
    - Dynamic instruction from CLI
 
-6. **Execute implementation via superpowers:executing-plans**
+6. **Execute implementation via `/sp-implement`**
 
-   Announce: "I'm using the superpowers:executing-plans skill to execute this change."
+   Announce: "Handing this off to `/sp-implement` to run the Superpowers implementation flow."
 
-   Then follow the **superpowers:executing-plans** skill exactly:
+   Build a concise task brief from the context files and invoke `/sp-implement`:
 
-   **Step 6a — Load and Review**
-   - Read all context files from step 4
-   - Review tasks.md critically — identify any gaps or blockers
-   - If concerns: raise them before proceeding
-   - If no concerns: create a TodoWrite list from tasks.md and proceed
+   ```
+   /sp-implement
+   Change: <change-name>
+   Spec: openspec/changes/<change-name>/specs/**/*.md
+   Design: openspec/changes/<change-name>/design.md (if present)
+   ADRs: adr/*.md (architectural commitments to honor)
+   Tasks: openspec/changes/<change-name>/tasks.md
+   ```
 
-   **Step 6b — Setup Workspace**
-   - Use **superpowers:using-git-worktrees** to ensure you are in an isolated worktree
-   - The worktree branch name should match the change name
+   `/sp-implement` will run the full Superpowers flow:
+   - **Recon** (`sp-recon`) — codebase context gathering
+   - **Research** (`sp-research`) — deep dive on complex areas
+   - **Implementation** (`sp-implementer`) — code changes with TDD
+   - **Code Review** (`sp-code-review`) — quality review against project standards
+   - **Debug** (`sp-debug`) — if regressions appear
+   - Branch finishing via the `finishing-a-development-branch` lifecycle skill
 
-   **Step 6c — Execute Tasks**
-   For each task in tasks.md:
-   1. Mark as in_progress
-   2. Follow each step exactly as described
-   3. Run verifications (tests, lint, type checks) after each task
-   4. Mark as completed only when verified
-
-   **STOP immediately if:**
-   - A blocker or missing dependency is encountered
-   - A test fails and the fix is not obvious
-   - An instruction contradicts the spec
-     Ask for clarification rather than guessing.
-
-   **Step 6d — Complete Development**
-   After all tasks are verified:
-   - Announce: "I'm using the superpowers:finishing-a-development-branch skill to complete this work."
-   - Use **superpowers:finishing-a-development-branch** to finalize
-   - After branch is finished: suggest archive with `/opsx-archive`
+   After `/sp-implement` completes: suggest archive with `/opsx-archive`.
 
 **Output During Implementation**
 
 ```
 ## Implementing: <change-name> (schema: <schema-name>)
 
-Setting up worktree for branch: <branch-name>
-
-Working on task 3/7: <task description>
-[...implementation + verification...]
-✓ Task complete
-
-Working on task 4/7: <task description>
-[...implementation + verification...]
-✓ Task complete
+Handing off to /sp-implement...
+[Superpowers flow: Recon → Research → Implement → Review]
+✓ Implementation complete
 ```
 
 **Output On Completion**
@@ -150,11 +134,9 @@ What would you like to do?
 
 **Guardrails**
 
-- Always use superpowers:executing-plans — never implement inline without it
-- Always read context files before starting (from the apply instructions output)
-- Always set up an isolated worktree via superpowers:using-git-worktrees
-- Run verifications after each task — don't batch them at the end
-- Pause on errors, blockers, or unclear requirements — don't guess
+- Always delegate to `/sp-implement` — never implement inline without it
+- Always read context files before building the brief (from the apply instructions output)
+- Pass spec, design, ADRs, and tasks explicitly in the brief — don't assume sp-implement knows the context
 - Use contextFiles from CLI output, don't assume specific file names
 
 **Fluid Workflow Integration**

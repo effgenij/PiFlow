@@ -91,40 +91,22 @@ Offer choices using `ask_user_question`:
 
 ## Phase 2: Brainstorm Designs (after requirements are clear)
 
-Follow the **superpowers:brainstorming** process:
+Delegate to **`/sp-brainstorm`** to run the structured Superpowers brainstorm flow.
 
-### Step 2a — Explore project context
+Announce: "I'm handing this off to `/sp-brainstorm` to structure the design."
 
-- Check existing files, docs, recent commits
-- Map relevant architecture
-- Find integration points and existing patterns
+Build a focused brief from the requirements summary and invoke:
 
-### Step 2b — Visual companion (if relevant)
+```
+/sp-brainstorm
+Idea: <crystallized goal from grill-me summary>
+Constraints: <key constraints and non-goals>
+Context: <relevant codebase areas, existing patterns>
+```
 
-If the topic involves UI, flows, or architecture — offer the Visual Companion in its own message before asking questions.
+`/sp-brainstorm` will explore context, ask clarifying questions, propose 2–3 approaches, present design sections, and save a spec/design doc.
 
-### Step 2c — Propose 2–3 approaches
-
-With trade-offs and your recommendation. Lead with the recommended option and explain why.
-
-### Step 2d — Present design sections
-
-Scale each section to its complexity. Get user approval after each section:
-
-- Architecture / components
-- Data flow
-- Error handling
-- Testing strategy
-
-### Step 2e — Capture the design
-
-When user approves:
-
-- Write design doc to `openspec/changes/<name>/design.md` if a change exists, or `docs/designs/YYYY-MM-DD-<topic>.md` otherwise
-- Self-review: check for placeholders, contradictions, ambiguity, missing scope
-- Ask user to review the written doc
-
-### Step 2f — Offer transition
+### After `/sp-brainstorm` completes — Offer transition
 
 ```markdown
 ## What We've Got
