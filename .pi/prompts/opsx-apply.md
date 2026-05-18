@@ -19,9 +19,11 @@ Implement tasks from an OpenSpec change.
    Always announce: "Using change: <name>" and how to override (e.g., `/opsx-apply <other>`).
 
 2. **Check status to understand the schema**
+
    ```bash
    openspec status --change "<name>" --json
    ```
+
    Parse the JSON to understand:
    - `schemaName`: The workflow being used (e.g., "spec-driven")
    - Which artifact contains the tasks (typically "tasks" for spec-driven, check status for others)
@@ -85,7 +87,7 @@ Implement tasks from an OpenSpec change.
    - A blocker or missing dependency is encountered
    - A test fails and the fix is not obvious
    - An instruction contradicts the spec
-   Ask for clarification rather than guessing.
+     Ask for clarification rather than guessing.
 
    **Step 6d — Complete Development**
    After all tasks are verified:
@@ -147,6 +149,7 @@ What would you like to do?
 ```
 
 **Guardrails**
+
 - Always use superpowers:executing-plans — never implement inline without it
 - Always read context files before starting (from the apply instructions output)
 - Always set up an isolated worktree via superpowers:using-git-worktrees

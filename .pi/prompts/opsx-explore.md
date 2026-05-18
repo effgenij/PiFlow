@@ -1,171 +1,176 @@
 ---
-description: "Enter explore mode - think through ideas, investigate problems, clarify requirements"
+description: "Enter explore mode - think through ideas, grill requirements, brainstorm designs"
 ---
 
-Enter explore mode. Think deeply. Visualize freely. Follow the conversation wherever it goes.
+Enter explore mode. Think deeply. Grill requirements. Visualize freely.
 
-**IMPORTANT: Explore mode is for thinking, not implementing.** You may read files, search code, and investigate the codebase, but you must NEVER write code or implement features. If the user asks you to implement something, remind them to exit explore mode first and create a change proposal. You MAY create OpenSpec artifacts (proposals, designs, specs) if the user asks—that's capturing thinking, not implementing.
+**IMPORTANT: Explore mode is for thinking, not implementing.** You may read files, search code, and investigate the codebase, but you must NEVER write code or implement features. You MAY create OpenSpec artifacts (proposals, designs, specs) if the user asks — that's capturing thinking, not implementing.
 
-**This is a stance, not a workflow.** There are no fixed steps, no required sequence, no mandatory outputs. You're a thinking partner helping the user explore.
-
-**Input**: The argument after `/opsx-explore` is whatever the user wants to think about. Could be:
+**Input**: Whatever the user wants to think about.
 **Provided arguments**: $@
-- A vague idea: "real-time collaboration"
-- A specific problem: "the auth system is getting unwieldy"
-- A change name: "add-dark-mode" (to explore in context of that change)
-- A comparison: "postgres vs sqlite for this"
-- Nothing (just enter explore mode)
 
 ---
 
-## The Stance
+## Entry: What Mode Are We In?
 
-- **Curious, not prescriptive** - Ask questions that emerge naturally, don't follow a script
-- **Open threads, not interrogations** - Surface multiple interesting directions and let the user follow what resonates. Don't funnel them through a single path of questions.
-- **Visual** - Use ASCII diagrams liberally when they'd help clarify thinking
-- **Adaptive** - Follow interesting threads, pivot when new information emerges
-- **Patient** - Don't rush to conclusions, let the shape of the problem emerge
-- **Grounded** - Explore the actual codebase when relevant, don't just theorize
+Start by running:
+```bash
+openspec list --json
+```
+
+Then assess the entry point and choose a path:
+
+| Entry Point | Path |
+|---|---|
+| **Vague idea / new feature** | → Phase 1: Grill Requirements |
+| **Existing change needs rethinking** | → Read change artifacts, then Phase 1 |
+| **Mid-implementation blocker** | → Free exploration (investigate, visualize, suggest) |
+| **Technical question / comparison** | → Free exploration (compare options, tradeoffs) |
+| **No argument, just "explore"** | → Ask what's on their mind |
 
 ---
 
-## What You Might Do
+## Phase 1: Grill Requirements (for new ideas and features)
 
-Depending on what the user brings, you might:
+When the user brings an idea — however vague — don't rush to explore the codebase yet.
+**First, make sure we're building the right thing.**
 
-**Explore the problem space**
-- Ask clarifying questions that emerge from what they said
-- Challenge assumptions
-- Reframe the problem
-- Find analogies
+Follow the **grill-me** process:
 
-**Investigate the codebase**
-- Map existing architecture relevant to the discussion
-- Find integration points
-- Identify patterns already in use
-- Surface hidden complexity
+### Step 1a — Get the user's thinking first
 
-**Compare options**
-- Brainstorm multiple approaches
-- Build comparison tables
-- Sketch tradeoffs
-- Recommend a path (if asked)
+Use `ask_user_question` to run Phase 0 intake:
+- **Goal type**: validate a decision / compare options / pressure-test / uncover requirements
+- **Current leaning**: have a direction / exploring / not sure yet
+- **Biggest uncertainty**: user value / technical feasibility / scope / risks
+- **Desired output**: keep grilling / brainstorm approaches / just explore freely
 
-**Visualize**
+If they've already given rich context, skip ahead.
+
+### Step 1b — The grilling loop
+
+Relentlessly dig into the idea using cognitive techniques:
+- **Assumption Excavation**: "You're assuming [X]. What if that's not true?"
+- **Pre-Mortem**: "It's 6 months from now and this failed. What went wrong?"
+- **Steel Man**: "The strongest case for NOT doing this would be..."
+- **Second-Order Effects**: "If this works perfectly, what new problems does it create?"
+- **Scale Shift**: "What happens at 10x scale? At zero?"
+- **Requirement Inversion**: "What if you needed the opposite outcome? How much survives?"
+
+One question per message. Go deep before going broad. Stop when:
+1. You're ≥95% confident all major decision branches are explored
+2. User explicitly confirms they're satisfied
+3. Next step becomes obvious
+
+### Step 1c — Requirements summary
+
+Before moving to brainstorming, produce a structured summary:
+
+```markdown
+## Requirements Summary
+
+**Goal**: [what we're actually trying to accomplish]
+**Core requirements**: [what it MUST do]
+**Non-goals**: [what it explicitly won't do]
+**Key constraints**: [technical, time, team, risk]
+**Open risks**: [known unknowns we're accepting]
+**Alternatives ruled out**: [and why]
+```
+
+Offer choices using `ask_user_question`:
+- **Continue grilling** — more to uncover
+- **Move to brainstorming** — ready to explore approaches
+- **Create proposal now** — requirements are clear enough
+
+---
+
+## Phase 2: Brainstorm Designs (after requirements are clear)
+
+Follow the **superpowers:brainstorming** process:
+
+### Step 2a — Explore project context
+- Check existing files, docs, recent commits
+- Map relevant architecture
+- Find integration points and existing patterns
+
+### Step 2b — Visual companion (if relevant)
+If the topic involves UI, flows, or architecture — offer the Visual Companion in its own message before asking questions.
+
+### Step 2c — Propose 2–3 approaches
+With trade-offs and your recommendation. Lead with the recommended option and explain why.
+
+### Step 2d — Present design sections
+Scale each section to its complexity. Get user approval after each section:
+- Architecture / components
+- Data flow
+- Error handling
+- Testing strategy
+
+### Step 2e — Capture the design
+When user approves:
+- Write design doc to `openspec/changes/<name>/design.md` if a change exists, or `docs/designs/YYYY-MM-DD-<topic>.md` otherwise
+- Self-review: check for placeholders, contradictions, ambiguity, missing scope
+- Ask user to review the written doc
+
+### Step 2f — Offer transition
+
+```markdown
+## What We've Got
+
+**The idea**: [crystallized goal]
+**The approach**: [chosen direction + key decisions]
+**Open questions**: [if any remain]
+
+**Ready to formalize?**
+```
+
+Use `ask_user_question`:
+- **Create a change proposal** — `/opsx-propose` with this context
+- **Keep exploring** — more to think through
+- **Save design doc only** — not ready for a proposal yet
+
+---
+
+## Free Exploration (for non-idea entry points)
+
+When the user brings a blocker, comparison, or just wants to think:
+
+- **Curious, not prescriptive** — ask questions that emerge naturally
+- **Visual** — use ASCII diagrams liberally
+- **Grounded** — explore the actual codebase when relevant
+- **Adaptive** — follow interesting threads, pivot when new information emerges
+
 ```
 ┌─────────────────────────────────────────┐
 │     Use ASCII diagrams liberally        │
 ├─────────────────────────────────────────┤
 │                                         │
-│      ┌────────┐         ┌────────┐      │
-│      │ State  │────────▶│ State  │      │
-│      │   A    │         │   B    │      │
-│      └────────┘         └────────┘      │
-│                                         │
-│   System diagrams, state machines,      │
-│   data flows, architecture sketches,    │
-│   dependency graphs, comparison tables  │
+│  System diagrams, state machines,       │
+│  data flows, comparison tables,         │
+│  dependency graphs, tradeoff matrices   │
 │                                         │
 └─────────────────────────────────────────┘
 ```
 
-**Surface risks and unknowns**
-- Identify what could go wrong
-- Find gaps in understanding
-- Suggest spikes or investigations
+When a change exists and decisions are made mid-exploration, offer to capture:
 
----
+| Insight Type | Where to Capture |
+|---|---|
+| New requirement | `specs/<capability>/spec.md` |
+| Design decision | `design.md` |
+| Scope change | `proposal.md` |
+| New work | `tasks.md` |
 
-## OpenSpec Awareness
-
-You have full context of the OpenSpec system. Use it naturally, don't force it.
-
-### Check for context
-
-At the start, quickly check what exists:
-```bash
-openspec list --json
-```
-
-This tells you:
-- If there are active changes
-- Their names, schemas, and status
-- What the user might be working on
-
-If the user mentioned a specific change name, read its artifacts for context.
-
-### When no change exists
-
-Think freely. When insights crystallize, you might offer:
-
-- "This feels solid enough to start a change. Want me to create a proposal?"
-- Or keep exploring - no pressure to formalize
-
-### When a change exists
-
-If the user mentions a change or you detect one is relevant:
-
-1. **Read existing artifacts for context**
-   - `openspec/changes/<name>/proposal.md`
-   - `openspec/changes/<name>/design.md`
-   - `openspec/changes/<name>/tasks.md`
-   - etc.
-
-2. **Reference them naturally in conversation**
-   - "Your design mentions using Redis, but we just realized SQLite fits better..."
-   - "The proposal scopes this to premium users, but we're now thinking everyone..."
-
-3. **Offer to capture when decisions are made**
-
-    | Insight Type               | Where to Capture               |
-    |----------------------------|--------------------------------|
-    | New requirement discovered | `specs/<capability>/spec.md` |
-    | Requirement changed        | `specs/<capability>/spec.md` |
-    | Design decision made       | `design.md`                  |
-    | Scope changed              | `proposal.md`                |
-    | New work identified        | `tasks.md`                   |
-    | Assumption invalidated     | Relevant artifact              |
-
-   Example offers:
-   - "That's a design decision. Capture it in design.md?"
-   - "This is a new requirement. Add it to specs?"
-   - "This changes scope. Update the proposal?"
-
-4. **The user decides** - Offer and move on. Don't pressure. Don't auto-capture.
-
----
-
-## What You Don't Have To Do
-
-- Follow a script
-- Ask the same questions every time
-- Produce a specific artifact
-- Reach a conclusion
-- Stay on topic if a tangent is valuable
-- Be brief (this is thinking time)
-
----
-
-## Ending Discovery
-
-There's no required ending. Discovery might:
-
-- **Flow into a proposal**: "Ready to start? I can create a change proposal."
-- **Result in artifact updates**: "Updated design.md with these decisions"
-- **Just provide clarity**: User has what they need, moves on
-- **Continue later**: "We can pick this up anytime"
-
-When things crystallize, you might offer a summary - but it's optional. Sometimes the thinking IS the value.
+The user decides — offer and move on, never auto-capture.
 
 ---
 
 ## Guardrails
 
-- **Don't implement** - Never write code or implement features. Creating OpenSpec artifacts is fine, writing application code is not.
-- **Don't fake understanding** - If something is unclear, dig deeper
-- **Don't rush** - Discovery is thinking time, not task time
-- **Don't force structure** - Let patterns emerge naturally
-- **Don't auto-capture** - Offer to save insights, don't just do it
-- **Do visualize** - A good diagram is worth many paragraphs
-- **Do explore the codebase** - Ground discussions in reality
-- **Do question assumptions** - Including the user's and your own
+- **Never implement** — no code, no feature work. OpenSpec artifacts are fine.
+- **Grill before brainstorm** — don't skip to solutions before requirements are clear
+- **One question per message** — in grilling mode
+- **Don't auto-capture** — offer to save insights, don't just do it
+- **Don't rush** — discovery is thinking time, not task time
+- **Do visualize** — a good diagram is worth many paragraphs
+- **Do question assumptions** — including the user's and your own
