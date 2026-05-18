@@ -14,19 +14,20 @@ Enter explore mode. Think deeply. Grill requirements. Visualize freely.
 ## Entry: What Mode Are We In?
 
 Start by running:
+
 ```bash
 openspec list --json
 ```
 
 Then assess the entry point and choose a path:
 
-| Entry Point | Path |
-|---|---|
-| **Vague idea / new feature** | → Phase 1: Grill Requirements |
-| **Existing change needs rethinking** | → Read change artifacts, then Phase 1 |
-| **Mid-implementation blocker** | → Free exploration (investigate, visualize, suggest) |
-| **Technical question / comparison** | → Free exploration (compare options, tradeoffs) |
-| **No argument, just "explore"** | → Ask what's on their mind |
+| Entry Point                          | Path                                                 |
+| ------------------------------------ | ---------------------------------------------------- |
+| **Vague idea / new feature**         | → Phase 1: Grill Requirements                        |
+| **Existing change needs rethinking** | → Read change artifacts, then Phase 1                |
+| **Mid-implementation blocker**       | → Free exploration (investigate, visualize, suggest) |
+| **Technical question / comparison**  | → Free exploration (compare options, tradeoffs)      |
+| **No argument, just "explore"**      | → Ask what's on their mind                           |
 
 ---
 
@@ -40,6 +41,7 @@ Follow the **grill-me** process:
 ### Step 1a — Get the user's thinking first
 
 Use `ask_user_question` to run Phase 0 intake:
+
 - **Goal type**: validate a decision / compare options / pressure-test / uncover requirements
 - **Current leaning**: have a direction / exploring / not sure yet
 - **Biggest uncertainty**: user value / technical feasibility / scope / risks
@@ -50,6 +52,7 @@ If they've already given rich context, skip ahead.
 ### Step 1b — The grilling loop
 
 Relentlessly dig into the idea using cognitive techniques:
+
 - **Assumption Excavation**: "You're assuming [X]. What if that's not true?"
 - **Pre-Mortem**: "It's 6 months from now and this failed. What went wrong?"
 - **Steel Man**: "The strongest case for NOT doing this would be..."
@@ -58,6 +61,7 @@ Relentlessly dig into the idea using cognitive techniques:
 - **Requirement Inversion**: "What if you needed the opposite outcome? How much survives?"
 
 One question per message. Go deep before going broad. Stop when:
+
 1. You're ≥95% confident all major decision branches are explored
 2. User explicitly confirms they're satisfied
 3. Next step becomes obvious
@@ -78,6 +82,7 @@ Before moving to brainstorming, produce a structured summary:
 ```
 
 Offer choices using `ask_user_question`:
+
 - **Continue grilling** — more to uncover
 - **Move to brainstorming** — ready to explore approaches
 - **Create proposal now** — requirements are clear enough
@@ -89,25 +94,32 @@ Offer choices using `ask_user_question`:
 Follow the **superpowers:brainstorming** process:
 
 ### Step 2a — Explore project context
+
 - Check existing files, docs, recent commits
 - Map relevant architecture
 - Find integration points and existing patterns
 
 ### Step 2b — Visual companion (if relevant)
+
 If the topic involves UI, flows, or architecture — offer the Visual Companion in its own message before asking questions.
 
 ### Step 2c — Propose 2–3 approaches
+
 With trade-offs and your recommendation. Lead with the recommended option and explain why.
 
 ### Step 2d — Present design sections
+
 Scale each section to its complexity. Get user approval after each section:
+
 - Architecture / components
 - Data flow
 - Error handling
 - Testing strategy
 
 ### Step 2e — Capture the design
+
 When user approves:
+
 - Write design doc to `openspec/changes/<name>/design.md` if a change exists, or `docs/designs/YYYY-MM-DD-<topic>.md` otherwise
 - Self-review: check for placeholders, contradictions, ambiguity, missing scope
 - Ask user to review the written doc
@@ -125,6 +137,7 @@ When user approves:
 ```
 
 Use `ask_user_question`:
+
 - **Create a change proposal** — `/opsx-propose` with this context
 - **Keep exploring** — more to think through
 - **Save design doc only** — not ready for a proposal yet
@@ -154,12 +167,12 @@ When the user brings a blocker, comparison, or just wants to think:
 
 When a change exists and decisions are made mid-exploration, offer to capture:
 
-| Insight Type | Where to Capture |
-|---|---|
+| Insight Type    | Where to Capture             |
+| --------------- | ---------------------------- |
 | New requirement | `specs/<capability>/spec.md` |
-| Design decision | `design.md` |
-| Scope change | `proposal.md` |
-| New work | `tasks.md` |
+| Design decision | `design.md`                  |
+| Scope change    | `proposal.md`                |
+| New work        | `tasks.md`                   |
 
 The user decides — offer and move on, never auto-capture.
 
