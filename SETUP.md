@@ -7,12 +7,12 @@ Extension инжектирует нужные скиллы в нужной фа�
 
 ## Команды
 
-| Команда | Что делает |
-|---|---|
+| Команда              | Что делает                                                      |
+| -------------------- | --------------------------------------------------------------- |
 | `/pf-feature [idea]` | Полный цикл: explore → propose (OpenSpec) → apply (Superpowers) |
-| `/pf-quick [task]` | Быстро без OpenSpec: brainstorm → plan → implement |
-| `/pf-explore [idea]` | Только исследование: grill-me + brainstorming |
-| `/pf-debug [issue]` | Дебаг: systematic-debugging + root-cause-tracing + TDD |
+| `/pf-quick [task]`   | Быстро без OpenSpec: brainstorm → plan → implement              |
+| `/pf-explore [idea]` | Только исследование: grill-me + brainstorming                   |
+| `/pf-debug [issue]`  | Дебаг: systematic-debugging + root-cause-tracing + TDD          |
 
 OpenSpec команды (`/opsx-propose`, `/opsx-apply` и др.) остаются доступны как есть.
 
@@ -20,13 +20,13 @@ OpenSpec команды (`/opsx-propose`, `/opsx-apply` и др.) остаютс
 
 ## Скиллы по фазам
 
-| Фаза | Скиллы |
-|---|---|
-| explore | `grill-me`, `brainstorming` |
-| propose | — (openspec управляет артефактами) |
-| apply | `writing-plans`, `subagent-driven-development`, `test-driven-development`, `verification-before-completion`, `finishing-a-development-branch` |
-| quick | `brainstorming`, `writing-plans`, `subagent-driven-development`, `test-driven-development`, `verification-before-completion`, `finishing-a-development-branch` |
-| debug | `systematic-debugging`, `test-driven-development`, `verification-before-completion` |
+| Фаза    | Скиллы                                                                                                                                                         |
+| ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| explore | `grill-me`, `brainstorming`                                                                                                                                    |
+| propose | — (openspec управляет артефактами)                                                                                                                             |
+| apply   | `writing-plans`, `subagent-driven-development`, `test-driven-development`, `verification-before-completion`, `finishing-a-development-branch`                  |
+| quick   | `brainstorming`, `writing-plans`, `subagent-driven-development`, `test-driven-development`, `verification-before-completion`, `finishing-a-development-branch` |
+| debug   | `systematic-debugging`, `test-driven-development`, `verification-before-completion`                                                                            |
 
 ---
 
