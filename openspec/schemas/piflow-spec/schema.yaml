@@ -183,29 +183,6 @@ apply:
   requires: [tasks]
   tracks: tasks.md
   instruction: |
-    You are about to implement the change described in this OpenSpec change folder.
-    Delegate implementation to /sp-implement from @teelicht/pi-superagents.
-
-    ## Context files to read first
-    - proposal.md — WHY this change exists
-    - specs/**/*.md — WHAT must be built (requirements + scenarios)
-    - design.md — HOW to build it (if present)
-    - <repo>/adr/*.md — architectural commitments to honor
-    - tasks.md — the task checklist
-
-    ## Execution
-
-    Build a concise task brief from the context files and invoke:
-
-      /sp-implement
-      Change: <change-name>
-      Spec: openspec/changes/<change-name>/specs/**/*.md
-      Design: openspec/changes/<change-name>/design.md (if present)
-      ADRs: adr/*.md
-      Tasks: openspec/changes/<change-name>/tasks.md
-
-    /sp-implement runs the full Superpowers flow:
-    Recon → Research → Implementation (TDD) → Code Review → Debug (if needed)
-    Branch finishing is handled automatically by the lifecycle skill.
-
-    After /sp-implement completes, suggest archive with `openspec archive`.
+    Read all context files, work through pending tasks, mark complete as you go.
+    Pause if you hit blockers or need clarification.
+    Use superpowers skills injected by PiFlow extension for implementation.

@@ -19,11 +19,9 @@ Implement tasks from an OpenSpec change.
    Always announce: "Using change: <name>" and how to override (e.g., `/opsx-apply <other>`).
 
 2. **Check status to understand the schema**
-
    ```bash
    openspec status --change "<name>" --json
    ```
-
    Parse the JSON to understand:
    - `schemaName`: The workflow being used (e.g., "spec-driven")
    - Which artifact contains the tasks (typically "tasks" for spec-driven, check status for others)
@@ -60,39 +58,41 @@ Implement tasks from an OpenSpec change.
    - Remaining tasks overview
    - Dynamic instruction from CLI
 
-6. **Execute implementation via `/sp-implement`**
+6. **Implement tasks (loop until done or blocked)**
 
-   Announce: "Handing this off to `/sp-implement` to run the Superpowers implementation flow."
+   For each pending task:
+   - Show which task is being worked on
+   - Make the code changes required
+   - Keep changes minimal and focused
+   - Mark task complete in the tasks file: `- [ ]` → `- [x]`
+   - Continue to next task
 
-   Build a concise task brief from the context files and invoke `/sp-implement`:
+   **Pause if:**
+   - Task is unclear → ask for clarification
+   - Implementation reveals a design issue → suggest updating artifacts
+   - Error or blocker encountered → report and wait for guidance
+   - User interrupts
 
-   ```
-   /sp-implement
-   Change: <change-name>
-   Spec: openspec/changes/<change-name>/specs/**/*.md
-   Design: openspec/changes/<change-name>/design.md (if present)
-   ADRs: adr/*.md (architectural commitments to honor)
-   Tasks: openspec/changes/<change-name>/tasks.md
-   ```
+7. **On completion or pause, show status**
 
-   `/sp-implement` will run the full Superpowers flow:
-   - **Recon** (`sp-recon`) — codebase context gathering
-   - **Research** (`sp-research`) — deep dive on complex areas
-   - **Implementation** (`sp-implementer`) — code changes with TDD
-   - **Code Review** (`sp-code-review`) — quality review against project standards
-   - **Debug** (`sp-debug`) — if regressions appear
-   - Branch finishing via the `finishing-a-development-branch` lifecycle skill
-
-   After `/sp-implement` completes: suggest archive with `/opsx-archive`.
+   Display:
+   - Tasks completed this session
+   - Overall progress: "N/M tasks complete"
+   - If all done: suggest archive
+   - If paused: explain why and wait for guidance
 
 **Output During Implementation**
 
 ```
 ## Implementing: <change-name> (schema: <schema-name>)
 
-Handing off to /sp-implement...
-[Superpowers flow: Recon → Research → Implement → Review]
-✓ Implementation complete
+Working on task 3/7: <task description>
+[...implementation happening...]
+✓ Task complete
+
+Working on task 4/7: <task description>
+[...implementation happening...]
+✓ Task complete
 ```
 
 **Output On Completion**
@@ -133,10 +133,13 @@ What would you like to do?
 ```
 
 **Guardrails**
-
-- Always delegate to `/sp-implement` — never implement inline without it
-- Always read context files before building the brief (from the apply instructions output)
-- Pass spec, design, ADRs, and tasks explicitly in the brief — don't assume sp-implement knows the context
+- Keep going through tasks until done or blocked
+- Always read context files before starting (from the apply instructions output)
+- If task is ambiguous, pause and ask before implementing
+- If implementation reveals issues, pause and suggest artifact updates
+- Keep code changes minimal and scoped to each task
+- Update task checkbox immediately after completing each task
+- Pause on errors, blockers, or unclear requirements - don't guess
 - Use contextFiles from CLI output, don't assume specific file names
 
 **Fluid Workflow Integration**
