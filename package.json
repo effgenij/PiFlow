@@ -1,0 +1,15 @@
+{
+  "name": "piflow",
+  "version": "2.0.0",
+  "description": "PiFlow — orchestrator for OpenSpec + Superpowers + specialised skills. Commands: pf-new, pf-full, pf-quick, pf-debug, pf-refactor, pf-status.",
+  "keywords": ["pi-package"],
+  "pi": {
+    "extensions": ["./extensions"],
+    "skills": ["./skills"],
+    "prompts": ["./prompts"]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*",
+    "typebox": "*"
+  }
+}

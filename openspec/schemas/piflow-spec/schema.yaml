@@ -38,6 +38,10 @@ artifacts:
     instruction: |
       Create specification files that define WHAT the system should do.
 
+      Use the `gherkin-authoring` skill for Gherkin-style acceptance criteria.
+      Scenarios SHOULD use GIVEN/WHEN/THEN steps where appropriate to make
+      behaviour observable and testable.
+
       Create one spec file per capability listed in the proposal's Capabilities section.
       - New capabilities: use the exact kebab-case name from the proposal (specs/<capability>/spec.md).
       - Modified capabilities: use the existing spec folder name from openspec/specs/<capability>/ when creating the delta spec at specs/<capability>/spec.md.
@@ -71,6 +75,11 @@ artifacts:
     template: design.md
     instruction: |
       Create the design document that explains HOW to implement the change.
+
+      Use the `c4-diagrams` skill to produce C4 diagrams (ASCII or Mermaid)
+      clarifying architecture before detailed design. Only the levels that
+      answer a real question. Include assumptions and open questions alongside
+      each diagram.
 
       When to include design.md (create only if any apply):
       - Cross-cutting change (multiple services/modules) or new architectural pattern
