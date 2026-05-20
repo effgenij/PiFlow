@@ -1,15 +1,30 @@
 {
   "name": "piflow",
-  "version": "2.0.0",
-  "description": "PiFlow — orchestrator for OpenSpec + Superpowers + specialised skills. Commands: pf-new, pf-full, pf-quick, pf-debug, pf-refactor, pf-status.",
-  "keywords": ["pi-package"],
+  "version": "3.0.0",
+  "type": "module",
+  "description": "PiFlow — orchestrator for OpenSpec + Superpowers + specialised skills. Commands: pf-new, pf-full, pf-quick, pf-debug, pf-refactor, pf-status, pf-doctor, pf-clean.",
+  "keywords": [
+    "pi-package"
+  ],
   "pi": {
-    "extensions": ["./extensions"],
-    "skills": ["./skills"],
-    "prompts": ["./prompts"]
+    "extensions": [
+      "./extensions/piflow/index.ts"
+    ],
+    "skills": [
+      "./skills"
+    ],
+    "prompts": [
+      "./prompts"
+    ]
+  },
+  "scripts": {
+    "typecheck": "tsc -p extensions/tsconfig.json --noEmit"
   },
   "peerDependencies": {
     "@earendil-works/pi-coding-agent": "*",
     "typebox": "*"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
   }
 }

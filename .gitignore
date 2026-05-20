@@ -1,2 +1,4 @@
 .pi/
 openspec/
+node_modules/
+extensions/.pi-lens/
