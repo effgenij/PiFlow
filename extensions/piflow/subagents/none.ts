@@ -11,7 +11,7 @@ export const noneAdapter: SubagentAdapter = {
 		return [
 			"Subagent backend: none",
 			"PiFlow will run workflows inline in the current agent session.",
-			"Optional packages such as @tintinweb/pi-subagents or pi-subagents can be evaluated later, but v1 does not require them.",
+			"Optional packages such as pi-subagents can be evaluated later, but v1 does not require them.",
 		].join("\n");
 	},
 };

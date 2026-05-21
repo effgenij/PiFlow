@@ -6,7 +6,6 @@ export { noneAdapter } from "./none.js";
 export type { SubagentAdapter, SubagentBackend } from "./types.js";
 
 const OPTIONAL_BACKENDS: Array<Exclude<SubagentBackend, "none">> = [
-	"tintinweb",
 	"pi-subagents",
 ];
 
@@ -14,7 +13,6 @@ const BACKEND_PACKAGE_NAMES: Record<
 	Exclude<SubagentBackend, "none">,
 	string
 > = {
-	tintinweb: "@tintinweb/pi-subagents",
 	"pi-subagents": "pi-subagents",
 };
 
@@ -23,7 +21,6 @@ export async function detectSubagentBackends(
 ): Promise<Record<SubagentBackend, boolean>> {
 	const detected: Record<SubagentBackend, boolean> = {
 		none: true,
-		tintinweb: false,
 		"pi-subagents": false,
 	};
 

@@ -50,7 +50,6 @@ const OPTIONAL_PACKAGES = [
 	"@juicesharp/rpiv-ask-user-question",
 	"@robhowley/pi-structured-return",
 	"pi-simplify",
-	"@tintinweb/pi-subagents",
 	"pi-subagents",
 ];
 
@@ -227,11 +226,6 @@ export async function runDoctor(pi: ExtensionAPI): Promise<string> {
 	lines.push("## Subagent backend candidates");
 	const backends = await detectSubagentBackends(pi);
 	lines.push("  [OK] none — inline execution, supported by v1");
-	lines.push(
-		backends.tintinweb
-			? "  [OK] @tintinweb/pi-subagents"
-			: "  [—] @tintinweb/pi-subagents",
-	);
 	lines.push(
 		backends["pi-subagents"]
 			? "  [OK] pi-subagents"
